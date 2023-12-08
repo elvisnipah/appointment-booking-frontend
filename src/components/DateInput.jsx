@@ -5,7 +5,7 @@ import { useState } from "react";
 
 import "react-datepicker/dist/react-datepicker.css";
 
-const DateInput = (props) => {
+const DateInput = ({ date, handleDateInputChange }) => {
   const filterPassedTime = (time) => {
     const currentDate = new Date();
     const selectedDate = new Date(time);
@@ -18,13 +18,15 @@ const DateInput = (props) => {
     return day !== 0 && day !== 6;
   };
 
-  const handleDateChange = (value) => {
+  const handleChange = (value) => {
     const isoDate = new Date(value).toISOString();
     if (isoDate.split("T")[1] === "00:00:00.000Z") {
-      return props.setDate(dateFns.setHours(dateFns.setMinutes(value, 0), 12));
+      return handleDateInputChange(
+        dateFns.setHours(dateFns.setMinutes(value, 0), 12)
+      );
     }
 
-    props.setDate(value);
+    handleDateInputChange(value);
   };
 
   return (
@@ -34,13 +36,13 @@ const DateInput = (props) => {
         className="w-[100%] p-1"
         dateFormat="MMMM d, yyyy h:mm aa"
         showTimeSelect
-        selected={props.date}
+        selected={date}
         filterTime={filterPassedTime}
         filterDate={isWeekday}
         minDate={new Date()}
         timeIntervals={60}
         placeholderText="Select a weekday"
-        onChange={(date) => handleDateChange(date)}
+        onChange={(date) => handleChange(date)}
         includeTimes={[
           dateFns.setHours(dateFns.setMinutes(new Date(), 0), 12),
           dateFns.setHours(dateFns.setMinutes(new Date(), 0), 13),

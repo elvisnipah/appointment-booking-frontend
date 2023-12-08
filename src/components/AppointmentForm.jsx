@@ -4,25 +4,37 @@ import DateInput from "./DateInput";
 import CustomInput from "./ui/CustomInput";
 
 const AppointmentForm = () => {
-  const [date, setDate] = useState("");
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
-  const [comment, setComment] = useState("");
-  const [appointmentType, setAppointmentType] = useState("consultation");
+  const initialState = {
+    date: "",
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
+    comment: "",
+    type: "consultation",
+  };
+
+  const [appointment, setAppointment] = useState(initialState);
+
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setAppointment((prevAppointment) => ({
+      ...prevAppointment,
+      [name]: value,
+    }));
+  };
+
+  const handleDateInputChange = (value) => {
+    setAppointment((prevAppointment) => ({
+      ...prevAppointment,
+      date: value,
+    }));
+  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log({
-      date: date,
-      firstName: firstName,
-      lastName: lastName,
-      email,
-      phone,
-      comment,
-      appointmentType,
-    });
+    console.log(appointment);
+    setAppointment(initialState);
   };
 
   return (
@@ -35,15 +47,18 @@ const AppointmentForm = () => {
         Kindly note that all appointments will have to be confirmed
       </p>
 
-      <DateInput date={date} setDate={setDate} />
+      <DateInput
+        date={appointment.date}
+        handleDateInputChange={handleDateInputChange}
+      />
 
       <Label>
         First Name:
         <CustomInput
           type="text"
           name="firstName"
-          value={firstName}
-          onChange={(event) => setFirstName(event.target.value)}
+          value={appointment.firstName}
+          onChange={handleInputChange}
         />
       </Label>
       <Label>
@@ -51,8 +66,8 @@ const AppointmentForm = () => {
         <CustomInput
           type="text"
           name="lastName"
-          value={lastName}
-          onChange={(event) => setLastName(event.target.value)}
+          value={appointment.lastName}
+          onChange={handleInputChange}
         />
       </Label>
       <Label>
@@ -60,8 +75,8 @@ const AppointmentForm = () => {
         <CustomInput
           type="email"
           name="email"
-          value={email}
-          onChange={(event) => setEmail(event.target.value)}
+          value={appointment.email}
+          onChange={handleInputChange}
         />
       </Label>
       <Label>
@@ -69,16 +84,16 @@ const AppointmentForm = () => {
         <CustomInput
           type="tel"
           name="phone"
-          value={phone}
-          onChange={(event) => setPhone(event.target.value)}
+          value={appointment.phone}
+          onChange={handleInputChange}
         />
       </Label>
       <Label>
         Select an appointment type:
         <select
           name="type"
-          onChange={(event) => setAppointmentType(event.target.value)}
-          value={appointmentType}
+          onChange={handleInputChange}
+          value={appointment.type}
           className="p-1"
         >
           <option value="consultation">Consultation</option>
@@ -92,8 +107,8 @@ const AppointmentForm = () => {
           name="comment"
           cols="30"
           rows="10"
-          value={comment}
-          onChange={(event) => setComment(event.target.value)}
+          value={appointment.comment}
+          onChange={handleInputChange}
         ></textarea>
       </Label>
 
