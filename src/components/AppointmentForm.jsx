@@ -1,9 +1,19 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Label from "./ui/Label";
 import DateInput from "./DateInput";
 import CustomInput from "./ui/CustomInput";
+import { useDispatch } from "react-redux";
+import { addBooking } from "../reducers/bookingReducer";
+import { useSelector } from "react-redux";
 
 const AppointmentForm = () => {
+  const appointments = useSelector(({ bookings }) => bookings);
+  useEffect(() => {
+    console.log(appointments);
+  }, [appointments]);
+
+  const dispatch = useDispatch();
+
   const initialState = {
     date: "",
     firstName: "",
@@ -34,6 +44,7 @@ const AppointmentForm = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log(appointment);
+    dispatch(addBooking(appointment));
     setAppointment(initialState);
   };
 
