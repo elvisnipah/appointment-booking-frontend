@@ -8,9 +8,7 @@ import { useSelector } from "react-redux";
 
 const AppointmentForm = () => {
   const appointments = useSelector(({ bookings }) => bookings);
-  useEffect(() => {
-    console.log(appointments);
-  }, [appointments]);
+  // useEffect(() => {}, [appointments]);
 
   const dispatch = useDispatch();
 

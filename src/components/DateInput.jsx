@@ -6,11 +6,30 @@ import { useState } from "react";
 import "react-datepicker/dist/react-datepicker.css";
 
 const DateInput = ({ date, handleDateInputChange }) => {
-  const filterPassedTime = (time) => {
-    const currentDate = new Date();
-    const selectedDate = new Date(time);
+  const dates = [
+    "2023-12-11T16:00:00",
+    "2023-11-10T12:00:00",
+    "2023-12-15T14:00:00",
+    "2023-12-13T12:00:00",
+  ];
 
-    return currentDate.getTime() < selectedDate.getTime();
+  const convertedDates = dates.map((date) => new Date(date));
+
+  // console.log(convertedDates);
+
+  const filterUnavailableTimes = (time) => {
+    for (let i = 0; i < convertedDates.length; i++) {
+      const result = checkIfDateAvailable(time, convertedDates[i]);
+      if (result === false) {
+        return false;
+      }
+    }
+    return true;
+  };
+
+  const checkIfDateAvailable = (calendarTime, unvailableTime) => {
+    const selectedDate = new Date(calendarTime);
+    return selectedDate.getTime() !== unvailableTime.getTime();
   };
 
   const isWeekday = (date) => {
@@ -37,7 +56,7 @@ const DateInput = ({ date, handleDateInputChange }) => {
         dateFormat="MMMM d, yyyy h:mm aa"
         showTimeSelect
         selected={date}
-        filterTime={filterPassedTime}
+        filterTime={filterUnavailableTimes}
         filterDate={isWeekday}
         minDate={new Date()}
         timeIntervals={60}
