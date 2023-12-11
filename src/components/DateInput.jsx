@@ -1,7 +1,6 @@
 import ReactDatePicker from "react-datepicker";
 import * as dateFns from "date-fns";
 import Label from "./ui/Label";
-import { useState } from "react";
 
 import "react-datepicker/dist/react-datepicker.css";
 
@@ -15,8 +14,6 @@ const DateInput = ({ date, handleDateInputChange }) => {
 
   const convertedDates = dates.map((date) => new Date(date));
 
-  // console.log(convertedDates);
-
   const filterUnavailableTimes = (time) => {
     for (let i = 0; i < convertedDates.length; i++) {
       const result = checkIfDateAvailable(time, convertedDates[i]);
@@ -29,6 +26,10 @@ const DateInput = ({ date, handleDateInputChange }) => {
 
   const checkIfDateAvailable = (calendarTime, unvailableTime) => {
     const selectedDate = new Date(calendarTime);
+    const currentDate = new Date();
+    if (selectedDate.getTime() < currentDate.getTime()) {
+      return false;
+    }
     return selectedDate.getTime() !== unvailableTime.getTime();
   };
 
