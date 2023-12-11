@@ -5,10 +5,13 @@ import CustomInput from "./ui/CustomInput";
 import { useDispatch } from "react-redux";
 import { addBooking } from "../reducers/bookingReducer";
 import { useSelector } from "react-redux";
+import { nanoid } from "nanoid";
+import { useNavigate } from "react-router-dom";
 
 const AppointmentForm = () => {
   const appointments = useSelector(({ bookings }) => bookings);
   // useEffect(() => {}, [appointments]);
+  const navigate = useNavigate();
 
   const dispatch = useDispatch();
 
@@ -42,8 +45,9 @@ const AppointmentForm = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log(appointment);
-    dispatch(addBooking(appointment));
+    dispatch(addBooking({ ...appointment, id: nanoid() }));
     setAppointment(initialState);
+    navigate("/confirm");
   };
 
   return (

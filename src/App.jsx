@@ -4,6 +4,7 @@ import AppointmentForm from "./components/AppointmentForm";
 import { Route, Routes } from "react-router-dom";
 import Header from "./components/ui/Header";
 import RouteErrorPage from "./components/RouteErrorPage";
+import ConfirmationPage from "./components/ConfirmationPage";
 
 const App = () => {
   const [user, setUser] = useState(null);
@@ -15,7 +16,7 @@ const App = () => {
       <Routes>
         <Route path="/" element="" />
         <Route path="/new" element={<AppointmentForm />} />
-        <Route path="/" element="" />
+        <Route path="/confirm" element={<ConfirmationPage />} />
         <Route path="*" element={<RouteErrorPage />} />
       </Routes>
     </div>

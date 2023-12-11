@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const bookingSlice = createSlice({
   name: "bookings",
-  initialState: {},
+  initialState: null,
   reducers: {
     setBooking(state, action) {
       return action.payload;
