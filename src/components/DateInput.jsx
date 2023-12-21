@@ -53,7 +53,7 @@ const DateInput = ({ date, handleDateInputChange }) => {
     <Label>
       Select a date and time:
       <ReactDatePicker
-        className="w-[100%] p-1"
+        className="input input-bordered input-primary w-full max-w-xs font-normal"
         dateFormat="MMMM d, yyyy h:mm aa"
         showTimeSelect
         selected={date}

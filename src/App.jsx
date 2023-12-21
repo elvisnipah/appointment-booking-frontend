@@ -11,7 +11,7 @@ const App = () => {
   const handleLogin = () => {};
 
   return (
-    <div className="bg-gray-100 page">
+    <div className="bg-base-100 page font-Raleway">
       <Header />
       <Routes>
         <Route path="/" element="" />

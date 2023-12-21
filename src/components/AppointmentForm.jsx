@@ -51,15 +51,19 @@ const AppointmentForm = () => {
   };
 
   return (
-    <div className="page p-4 bg-gray-100">
+    <div className="page p-4 max-w-[500px] md:max-w-[800px] self-center">
       <form
-        className="flex flex-col gap-3 border-2 rounded-lg p-4"
+        className="flex flex-col md:grid md:grid-cols-2 gap-3 border-4 border-primary rounded-md p-4"
         onSubmit={handleSubmit}
       >
-        <h1 className="text-2xl font-bold">Book An Appointment</h1>
-        <p className="font-bold text-center text-sm text-purple-600">
-          Kindly note that all appointments will have to be confirmed
-        </p>
+        <div className="md:col-span-2 flex flex-col items-center">
+          <h1 className="text-2xl font-bold text-secondary ">
+            Book An Appointment
+          </h1>
+          <p className="font-bold text-xs text-info">
+            * Kindly note that all appointments will have to be confirmed
+          </p>
+        </div>
 
         <DateInput
           date={appointment.date}
@@ -108,16 +112,16 @@ const AppointmentForm = () => {
             name="type"
             onChange={handleInputChange}
             value={appointment.type}
-            className="p-1"
+            className="select select-primary w-full max-w-xs"
           >
             <option value="consultation">Consultation</option>
             <option value="fitting">Fitting</option>
           </select>
         </Label>
-        <Label>
+        <Label colspan>
           Leave a comment:
           <textarea
-            className="p-1"
+            className="textarea textarea-primary max-h-[200px] font-normal"
             name="comment"
             cols="30"
             rows="10"
@@ -126,10 +130,7 @@ const AppointmentForm = () => {
           ></textarea>
         </Label>
 
-        <button
-          type="submit"
-          className="bg-sky-400 border-2 rounded-lg w-[180px] self-center text-white p-2 font-bold"
-        >
+        <button type="submit" className="btn btn-secondary md:col-span-2">
           Book Appointment
         </button>
       </form>

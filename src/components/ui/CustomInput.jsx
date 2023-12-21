@@ -1,7 +1,7 @@
 const CustomInput = (props) => {
   return (
     <input
-      className="p-1 rounded-lg"
+      className="input input-bordered input-primary w-full max-w-xs font-normal"
       type={props.type}
       name={props.name}
       value={props.value}

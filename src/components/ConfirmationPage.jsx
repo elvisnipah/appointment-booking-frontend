@@ -3,8 +3,6 @@ import { useSelector } from "react-redux";
 const ConfirmationPage = () => {
   const appointment = useSelector(({ bookings }) => bookings);
 
-  console.log(appointment);
-
   if (!appointment) {
     return <div>Nothing to see here</div>;
   }
@@ -12,6 +10,8 @@ const ConfirmationPage = () => {
   return (
     <div>
       Your appointment is scheduled. Appointment ID is ${appointment.id}
+      <br />
+      You can contact +2345345345345 to make enquiries.
     </div>
   );
 };

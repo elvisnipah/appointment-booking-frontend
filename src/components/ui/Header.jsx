@@ -2,22 +2,33 @@ import { Link } from "react-router-dom";
 
 const Header = () => {
   return (
-    <header className="flex justify-between p-2 bg-slate-600 text-white font-bold">
-      <div className="flex gap-3">
-        <p>bookMe</p>
-      </div>
-      <div className="flex gap-2">
-        <Link to="/">
-          <p>home</p>
-        </Link>
-        <Link to="/new">
-          <p>schedule appointment</p>
-        </Link>
-        <Link to="/">
-          <p>other</p>
+    <div className="navbar bg-base-100">
+      <div className="flex-1">
+        <Link to="/" className="btn btn-ghost text-xl">
+          lush
         </Link>
       </div>
-    </header>
+      <div className="flex-none">
+        <ul className="menu menu-horizontal px-1">
+          <li>
+            <Link to="/new">schedule</Link>
+          </li>
+          <li>
+            <details>
+              <summary>Menu</summary>
+              <ul className="p-2 bg-base-100 rounded-t-none">
+                <li>
+                  <a>Link 1</a>
+                </li>
+                <li>
+                  <a>Link 2</a>
+                </li>
+              </ul>
+            </details>
+          </li>
+        </ul>
+      </div>
+    </div>
   );
 };
 
