@@ -5,7 +5,7 @@ const Header = () => {
     <div className="navbar bg-base-100">
       <div className="flex-1">
         <Link to="/" className="btn btn-ghost text-xl">
-          lush
+          dress store
         </Link>
       </div>
       <div className="flex-none">
@@ -16,7 +16,7 @@ const Header = () => {
           <li>
             <details>
               <summary>Menu</summary>
-              <ul className="p-2 bg-base-100 rounded-t-none">
+              <ul className="p-2 bg-base-100 rounded-t-none z-50">
                 <li>
                   <a>Link 1</a>
                 </li>

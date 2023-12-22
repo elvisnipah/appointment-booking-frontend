@@ -5,6 +5,8 @@ import { Route, Routes } from "react-router-dom";
 import Header from "./components/ui/Header";
 import RouteErrorPage from "./components/RouteErrorPage";
 import ConfirmationPage from "./components/ConfirmationPage";
+import MainPage from "./components/MainPage";
+import Footer from "./components/ui/Footer";
 
 const App = () => {
   const [user, setUser] = useState(null);
@@ -14,11 +16,12 @@ const App = () => {
     <div className="bg-base-100 page font-Raleway">
       <Header />
       <Routes>
-        <Route path="/" element="" />
+        <Route path="/" element={<MainPage />} />
         <Route path="/new" element={<AppointmentForm />} />
         <Route path="/confirm" element={<ConfirmationPage />} />
         <Route path="*" element={<RouteErrorPage />} />
       </Routes>
+      <Footer />
     </div>
   );
 };

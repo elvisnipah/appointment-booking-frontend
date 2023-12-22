@@ -60,6 +60,7 @@ const DateInput = ({ date, handleDateInputChange }) => {
         filterTime={filterUnavailableTimes}
         filterDate={isWeekday}
         minDate={new Date()}
+        name="date"
         timeIntervals={60}
         placeholderText="Select a weekday"
         onChange={(date) => handleChange(date)}
