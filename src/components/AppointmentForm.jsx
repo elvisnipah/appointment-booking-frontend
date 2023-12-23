@@ -127,7 +127,7 @@ const AppointmentForm = () => {
             rows="10"
             value={appointment.comment}
             onChange={handleInputChange}
-          ></textarea>
+          />
         </Label>
 
         <button type="submit" className="btn btn-secondary md:col-span-2">
