@@ -9,7 +9,7 @@ const ConfirmationPage = () => {
 
   return (
     <div>
-      Your appointment is scheduled. Appointment ID is ${appointment.id}
+      Your appointment is scheduled. Appointment ID is {appointment.id}
       <br />
       You can contact +2345345345345 to make enquiries.
     </div>

@@ -5,7 +5,6 @@ import CustomInput from "./ui/CustomInput";
 import { useDispatch } from "react-redux";
 import { addBooking } from "../reducers/bookingReducer";
 import { useSelector } from "react-redux";
-import { nanoid } from "nanoid";
 import { useNavigate } from "react-router-dom";
 
 const AppointmentForm = () => {
@@ -16,11 +15,11 @@ const AppointmentForm = () => {
   const dispatch = useDispatch();
 
   const initialState = {
-    date: "",
+    appointmentTime: "",
     firstName: "",
     lastName: "",
     email: "",
-    phone: "",
+    phoneNumber: "",
     comment: "",
     type: "consultation",
   };
@@ -38,14 +37,14 @@ const AppointmentForm = () => {
   const handleDateInputChange = (value) => {
     setAppointment((prevAppointment) => ({
       ...prevAppointment,
-      date: value,
+      appointmentTime: value,
     }));
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log(appointment);
-    dispatch(addBooking({ ...appointment, id: nanoid() }));
+    dispatch(addBooking(appointment));
     setAppointment(initialState);
     navigate("/confirm");
   };
@@ -55,6 +54,7 @@ const AppointmentForm = () => {
       <form
         className="flex flex-col md:grid md:grid-cols-2 gap-3 border-4 border-primary rounded-md p-4"
         onSubmit={handleSubmit}
+        autoComplete="off"
       >
         <div className="md:col-span-2 flex flex-col items-center">
           <h1 className="text-2xl font-bold text-secondary ">
@@ -66,7 +66,7 @@ const AppointmentForm = () => {
         </div>
 
         <DateInput
-          date={appointment.date}
+          date={appointment.appointmentTime}
           handleDateInputChange={handleDateInputChange}
         />
 
@@ -101,8 +101,8 @@ const AppointmentForm = () => {
           Phone number:
           <CustomInput
             type="tel"
-            name="phone"
-            value={appointment.phone}
+            name="phoneNumber"
+            value={appointment.phoneNumber}
             onChange={handleInputChange}
           />
         </Label>
