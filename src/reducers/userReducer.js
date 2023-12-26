@@ -14,7 +14,6 @@ const userSlice = createSlice({
         return returnedUser;
       } else {
         signOutUser();
-        console.log("does this even run");
         return null;
       }
     },
