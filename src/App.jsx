@@ -1,16 +1,22 @@
-import { useState } from "react";
-import LoginForm from "./components/LoginForm";
-import AppointmentForm from "./components/AppointmentForm";
 import { Route, Routes } from "react-router-dom";
+import { useDispatch } from "react-redux";
+
+import AppointmentForm from "./components/AppointmentForm";
 import Header from "./components/ui/Header";
 import RouteErrorPage from "./components/RouteErrorPage";
 import ConfirmationPage from "./components/ConfirmationPage";
 import MainPage from "./components/MainPage";
 import Footer from "./components/ui/Footer";
+import AdminPage from "./components/AdminPage";
+import { useEffect } from "react";
+import { getUser } from "./reducers/userReducer";
 
 const App = () => {
-  const [user, setUser] = useState(null);
-  const handleLogin = () => {};
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getUser());
+  }, []);
 
   return (
     <div className="bg-base-100 page font-Raleway">
@@ -19,6 +25,7 @@ const App = () => {
         <Route path="/" element={<MainPage />} />
         <Route path="/new" element={<AppointmentForm />} />
         <Route path="/confirm" element={<ConfirmationPage />} />
+        <Route path="/admin" element={<AdminPage />} />
         <Route path="*" element={<RouteErrorPage />} />
       </Routes>
       <Footer />
