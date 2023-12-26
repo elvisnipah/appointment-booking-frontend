@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 const Header = () => {
   return (
-    <div className="navbar bg-base-100">
+    <div className="navbar bg-base-100 sticky top-0 z-50">
       <div className="flex-1">
         <Link to="/" className="btn btn-ghost text-xl">
           dress store
@@ -18,7 +18,13 @@ const Header = () => {
               <summary>Menu</summary>
               <ul className="p-2 bg-base-100 rounded-t-none z-50">
                 <li>
-                  <a>Link 1</a>
+                  <a
+                    target="_blank"
+                    rel="noreferrer"
+                    href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+                  >
+                    Link 1
+                  </a>
                 </li>
                 <li>
                   <a>Link 2</a>

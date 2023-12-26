@@ -10,6 +10,7 @@ const Image = (props) => {
     ></img>
   );
 };
+
 const Carousel = () => {
   return (
     <div className="carousel carousel-center p-4 space-x-4 bg-gray-700 rounded-box">
