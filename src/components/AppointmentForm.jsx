@@ -43,7 +43,6 @@ const AppointmentForm = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(appointment);
     dispatch(addBooking(appointment));
     setAppointment(initialState);
     navigate("/confirm");
