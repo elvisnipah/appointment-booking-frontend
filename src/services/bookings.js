@@ -28,4 +28,12 @@ const create = async (data) => {
   return response.data;
 };
 
-export default { create, getAll, setToken };
+const update = async (id, data) => {
+  const config = {
+    headers: { Authorization: token },
+  };
+  const response = await axios.put(`${baseUrl}/${id}`, data, config);
+  return response.data;
+};
+
+export default { create, getAll, setToken, update };
