@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import bookingService from "../services/bookings";
 
 import { showAllBookings } from "../reducers/bookingReducer";
+import BookingItem from "./BookingItem";
 
 const AdminPage = () => {
   const dispatch = useDispatch();
@@ -26,26 +27,13 @@ const AdminPage = () => {
     );
   }
 
-  const Booking = ({ item }) => {
-    return (
-      <div className="flex flex-col border-2 border-primary p-4 ">
-        <p>
-          Name: {item.firstName} {item.lastName}
-        </p>
-        <p>{item.email}</p>
-        <p>{item.phoneNumber}</p>
-        <p>Time: {new Date(item.appointmentTime).toUTCString()}</p>
-      </div>
-    );
-  };
-
   const BookingsList = () => {
     return (
       <div className="my-4 self-start">
         <h1 className="font-bold text-2xl py-2">Appointments</h1>
         <div className="md:grid md:grid-cols-3 flex flex-col gap-4">
           {bookings &&
-            bookings.map((item) => <Booking key={item.id} item={item} />)}
+            bookings.map((item) => <BookingItem key={item.id} item={item} />)}
         </div>
       </div>
     );
