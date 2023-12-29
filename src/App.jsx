@@ -10,6 +10,7 @@ import Footer from "./components/ui/Footer";
 import AdminPage from "./components/AdminPage";
 import { useEffect } from "react";
 import { getUser } from "./reducers/userReducer";
+import NotificationDisplay from "./components/ui/NotificationDisplay";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -21,6 +22,7 @@ const App = () => {
   return (
     <div className="bg-base-100 page font-Raleway">
       <Header />
+      <NotificationDisplay />
       <Routes>
         <Route path="/" element={<MainPage />} />
         <Route path="/new" element={<AppointmentForm />} />

@@ -15,7 +15,7 @@ const Header = () => {
           </li>
           <li>
             <details>
-              <summary>Menu</summary>
+              <summary>menu</summary>
               <ul className="p-2 bg-base-100 rounded-t-none z-50">
                 <li>
                   <a

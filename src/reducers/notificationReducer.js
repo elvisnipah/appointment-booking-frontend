@@ -18,8 +18,10 @@ export const { append, remove } = notificationSlice.actions;
 export const setNotification = (message) => {
   return (dispatch) => {
     dispatch(append(message));
+    document.getElementById("my_modal_2").showModal();
     setTimeout(() => {
       dispatch(remove());
+      document.getElementById("my_modal_2").close();
     }, 5000);
   };
 };

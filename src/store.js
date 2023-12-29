@@ -6,7 +6,7 @@ import userReducer from "./reducers/userReducer";
 const store = configureStore({
   reducer: {
     bookings: bookingReducer,
-    notifications: notificationReducer,
+    notification: notificationReducer,
     user: userReducer,
   },
 });
