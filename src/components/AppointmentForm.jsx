@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux";
 import { addBooking } from "../reducers/bookingReducer";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { setNotification } from "../reducers/notificationReducer";
 
 const AppointmentForm = () => {
   const appointments = useSelector(({ bookings }) => bookings);
@@ -41,11 +42,18 @@ const AppointmentForm = () => {
     }));
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    dispatch(addBooking(appointment));
-    setAppointment(initialState);
-    navigate("/confirm");
+    dispatch(addBooking(appointment))
+      .then(() => {
+        setAppointment(initialState);
+        navigate("/confirm");
+        console.log("worked");
+      })
+      .catch((err) => {
+        dispatch(setNotification(err.response.data.error));
+        console.log(err.response.data.error);
+      });
   };
 
   return (
