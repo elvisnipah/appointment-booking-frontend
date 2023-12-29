@@ -19,9 +19,9 @@ const LoginForm = () => {
       window.localStorage.setItem("loggedInUser", JSON.stringify(userObject));
       setUsername("");
       setPassword("");
-      dispatch(setNotification(username + "successfully logged in"));
+      dispatch(setNotification(username + " successfully logged in"));
     } catch (exception) {
-      dispatch(setNotification("incorrect username/password"));
+      dispatch(setNotification("login-fail"));
     }
   };
 
