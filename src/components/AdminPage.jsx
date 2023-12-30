@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import React from "react";
 import LoginForm from "./LoginForm";
 import { useSelector, useDispatch } from "react-redux";
-import bookingService from "../services/bookings";
+import { logoutUser } from "../reducers/userReducer";
 
 import { showAllBookings } from "../reducers/bookingReducer";
 import BookingItem from "./BookingItem";
@@ -27,6 +27,10 @@ const AdminPage = () => {
     );
   }
 
+  const handleLogout = () => {
+    dispatch(logoutUser());
+  };
+
   const BookingsList = () => {
     return (
       <div className="my-4 self-start">
@@ -41,7 +45,13 @@ const AdminPage = () => {
 
   return (
     <div className="p-4 flex flex-col">
-      <div className="text-green-500 font-bold">{user.username} logged in</div>
+      <div className="flex justify-between items-center">
+        <p className="text-green-500 font-bold">{user.username} logged in</p>
+        <button className="btn btn-sm" onClick={handleLogout}>
+          logout
+        </button>
+      </div>
+
       <BookingsList />
     </div>
   );

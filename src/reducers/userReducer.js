@@ -24,6 +24,7 @@ const userSlice = createSlice({
     },
     signOutUser(state, action) {
       bookingService.setToken(null);
+      window.localStorage.removeItem("loggedInUser");
       return null;
     },
   },
@@ -45,6 +46,12 @@ export const getUser = () => {
 export const setUser = (user) => {
   return (dispatch) => {
     dispatch(assignUser(user));
+  };
+};
+
+export const logoutUser = () => {
+  return (dispatch) => {
+    dispatch(signOutUser());
   };
 };
 
