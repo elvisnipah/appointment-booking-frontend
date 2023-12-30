@@ -46,13 +46,22 @@ const BookingItem = ({ item }) => {
       <p>{item.email}</p>
       <p>{item.phoneNumber}</p>
       <p>{new Date(item.appointmentTime).toUTCString()}</p>
-      <div className="flex gap-4 mt-4">
-        <button className="btn btn-sm btn-success" onClick={confirm}>
-          Confirm
-        </button>
-        <button className="btn btn-sm btn-outline btn-error" onClick={decline}>
-          Cancel
-        </button>
+      {/* prettier-ignore */}
+      <div className="flex gap-4 mt-auto">
+        {(itemStatus() === "Declined" || itemStatus() === "Pending") && (
+            <button className="btn btn-sm btn-success" onClick={confirm}>
+              Accept
+            </button>)
+        }
+        {(itemStatus() === "Pending" || itemStatus() === "Accepted") && (
+            <button
+              className="btn btn-sm btn-outline btn-error"
+              onClick={decline}
+            >
+              Decline
+            </button>
+          )
+        }
       </div>
     </div>
   );
