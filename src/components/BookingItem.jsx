@@ -12,57 +12,78 @@ const BookingItem = ({ item }) => {
     dispatch(declineBooking(item.id, { ...item, status: "declined" }));
   };
 
-  const itemStatus = () => {
-    switch (item.status) {
-      case "confirmed":
-        return "Accepted";
-      case "declined":
-        return "Declined";
-      case "waiting":
-        return "Pending";
-    }
-  };
+  const isAppointmentPast = new Date(item.appointmentTime) < new Date();
 
-  const itemStatusStyle = () => {
-    switch (itemStatus()) {
-      case "Accepted":
-        return "p-2 inline-flex rounded-lg font-bold h-8 text-center text-sm bg-green-500 text-white";
-      case "Declined":
-        return "p-2 inline-flex rounded-lg font-bold h-8 text-center text-sm bg-red-500 text-white";
-      case "Pending":
-        return "p-2 inline-flex rounded-lg font-bold h-8 text-center text-sm bg-gray-500 text-white";
-    }
-  };
+  let itemStatus = "";
+
+  switch (item.status) {
+    case "confirmed":
+      itemStatus = "Accepted";
+      break;
+    case "declined":
+      itemStatus = "Declined";
+      break;
+    case "waiting":
+      switch (isAppointmentPast) {
+        case true:
+          itemStatus = "No Action";
+          break;
+        case false:
+          itemStatus = "Pending";
+          break;
+      }
+      break;
+  }
+
+  let itemStatusStyle = "";
+
+  switch (itemStatus) {
+    case "Accepted":
+      itemStatusStyle = "text-green-600";
+      break;
+    case "Declined":
+      itemStatusStyle = "text-red-600";
+      break;
+    case "Pending":
+      itemStatusStyle = "text-sky-600";
+      break;
+    case "No Action":
+      itemStatusStyle = "text-gray-500";
+      break;
+  }
 
   return (
     <div className="flex flex-col border-2 border-primary p-4">
       {/* <p className="self-end">hello</p> */}
-      <div className="flex justify-between">
-        <p>
+      <div className="flex justify-between items-center gap-3">
+        <p className="font-bold">
           {item.firstName} {item.lastName}
         </p>
-        <p className={itemStatusStyle()}>{itemStatus()}</p>
+        <p className={`font-bold text-sm ${itemStatusStyle}`}>{itemStatus}</p>
       </div>
       <p>{item.email}</p>
       <p>{item.phoneNumber}</p>
-      <p>{new Date(item.appointmentTime).toUTCString()}</p>
+      <p>{new Date(item.appointmentTime).toDateString()}</p>
+      <p>{new Date(item.appointmentTime).toLocaleTimeString()}</p>
       {/* prettier-ignore */}
-      <div className="flex gap-4 mt-auto">
-        {(itemStatus() === "Declined" || itemStatus() === "Pending") && (
+
+      {!isAppointmentPast && (
+        <div className="flex gap-4 mt-auto">
+          {(itemStatus === "Declined" || itemStatus === "Pending") && (
             <button className="btn btn-sm btn-success" onClick={confirm}>
               Accept
-            </button>)
-        }
-        {(itemStatus() === "Pending" || itemStatus() === "Accepted") && (
+            </button>
+          )}
+          {(itemStatus === "Pending" || itemStatus === "Accepted") && (
             <button
               className="btn btn-sm btn-outline btn-error"
               onClick={decline}
             >
               Decline
             </button>
-          )
-        }
-      </div>
+          )}
+        </div>
+      )}
     </div>
   );
 };
